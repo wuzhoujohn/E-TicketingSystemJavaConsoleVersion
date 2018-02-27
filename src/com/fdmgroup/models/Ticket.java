@@ -12,6 +12,8 @@ public class Ticket {
 	
 	private Address address;
 	
+	private double price;
+	
 	//private int numInStock;
 	
 	
@@ -20,13 +22,22 @@ public class Ticket {
 		return address;
 	}
 
-	public Ticket(int ticketId, String seatNum, String event, Address address) {
+	public Ticket(int ticketId, String seatNum, String event, Address address, double price) {
 		super();
 		this.ticketId = ticketId;
 		this.seatNum = seatNum;
 		this.avail = true;
 		this.event = event;
 		this.address = address;
+		this.price = price;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	@Override

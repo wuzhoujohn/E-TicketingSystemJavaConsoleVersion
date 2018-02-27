@@ -10,8 +10,8 @@ public class Category {
 	
 	private boolean categoryAvail;
 	
-	//private int numInStock;
-	
+	private int numInStock;
+
 	public Category(String eventName) {
 		super();
 		this.eventName = eventName;
@@ -42,6 +42,20 @@ public class Category {
 
 	public void setCategoryAvail(boolean categoryAvail) {
 		this.categoryAvail = categoryAvail;
+	}
+	
+	public int getNumInStock() {
+		return numInStock;
+	}
+
+	public void setNumInStock(List<Ticket> tickets) {
+		int res = 0;
+		for(Ticket t : tickets){
+			if(t.getEvent() == this.eventName && t.isAvail()){
+				res++;
+			}
+		}
+		this.numInStock = res;
 	}
 	
 	

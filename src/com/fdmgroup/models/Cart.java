@@ -9,6 +9,22 @@ public class Cart {
 	
 	private List<Ticket> tickets;
 
+	
+	/**
+	 * 
+	 */
+	public Cart() {
+		super();
+		tickets = new ArrayList<Ticket>();
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "Cart [tickets=" + tickets + "]";
+	}
+
+
 	public int getCartId() {
 		return cartId;
 	}

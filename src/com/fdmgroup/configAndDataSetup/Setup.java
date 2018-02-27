@@ -57,29 +57,29 @@ public class Setup {
 		
 		Address address10 = new Address("Canada", "British Columbia", "Vancouver", "46 jhn Ave", "U4F9FA");
 		
-		Ticket ticket1 = new Ticket(1, "1A", "Movie", address1);
+		Ticket ticket1 = new Ticket(1, "1A", "Movie", address1, 79.9);
 		
-		Ticket ticket2 = new Ticket(2, "1B", "Movie", address1);
+		Ticket ticket2 = new Ticket(2, "1B", "Movie", address1, 81.1);
 		
-		Ticket ticket3 = new Ticket(3, "2A", "Movie", address1);
+		Ticket ticket3 = new Ticket(3, "2A", "Movie", address1, 90.5);
 		
-		Ticket ticket4 = new Ticket(4, "2B", "Movie", address1);
+		Ticket ticket4 = new Ticket(4, "2B", "Movie", address1, 100);
 		
-		Ticket ticket5 = new Ticket(5, "1A", "NBA", address2);
+		Ticket ticket5 = new Ticket(5, "1A", "NBA", address2, 102);
 		
-		Ticket ticket6 = new Ticket(6, "2A", "NBA", address3);
+		Ticket ticket6 = new Ticket(6, "2A", "NBA", address3, 100);
 		
-		Ticket ticket7 = new Ticket(7, "2B", "NBA", address4);
+		Ticket ticket7 = new Ticket(7, "2B", "NBA", address4, 99.5);
 		
-		Ticket ticket8 = new Ticket(8, "1C", "Concert", address5);
+		Ticket ticket8 = new Ticket(8, "1C", "Concert", address5, 45);
 		
-		Ticket ticket9 = new Ticket(9, "1D", "Concert", address5);
+		Ticket ticket9 = new Ticket(9, "1D", "Concert", address5, 67);
 		
-		Ticket ticket10 = new Ticket(10, "1E", "Concert", address5);
+		Ticket ticket10 = new Ticket(10, "1E", "Concert", address5, 234.5);
 		
-		Ticket ticket11 = new Ticket(11, "2A", "Baseball", address6);
+		Ticket ticket11 = new Ticket(11, "2A", "Baseball", address6, 239.5);
 		
-		Ticket ticket12 = new Ticket(12, "3B", "Baseball", address6);
+		Ticket ticket12 = new Ticket(12, "3B", "Baseball", address6, 256.5);
 		
 		tickets.add(ticket1);
 		
