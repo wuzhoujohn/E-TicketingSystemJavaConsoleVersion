@@ -1,4 +1,4 @@
-package com.fdmgroup.dto;
+package com.fdmgroup.models;
 
 public class Ticket {
 	
@@ -10,7 +10,33 @@ public class Ticket {
 	
 	private String event;
 	
+	private Address address;
+	
 	//private int numInStock;
+	
+	
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public Ticket(int ticketId, String seatNum, String event, Address address) {
+		super();
+		this.ticketId = ticketId;
+		this.seatNum = seatNum;
+		this.avail = true;
+		this.event = event;
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "Ticket [ticketId:" + ticketId + ", seatNum:" + seatNum + ", " + address + "]";
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 	public int getTicketId() {
 		return ticketId;

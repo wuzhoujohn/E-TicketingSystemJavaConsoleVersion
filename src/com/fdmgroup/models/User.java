@@ -1,4 +1,4 @@
-package com.fdmgroup.dto;
+package com.fdmgroup.models;
 
 public class User {
 	
