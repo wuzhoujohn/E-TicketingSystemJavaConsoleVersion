@@ -42,7 +42,7 @@ public class Ticket {
 
 	@Override
 	public String toString() {
-		return "Ticket [ticketId:" + ticketId + ", seatNum:" + seatNum + ", " + address + "]";
+		return "Ticket [ticketId:" + ticketId + ", seatNum:" + seatNum + ", price:" + price + ", " + address + "]";
 	}
 
 	public void setAddress(Address address) {

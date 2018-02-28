@@ -96,24 +96,25 @@ public class E_TicketingController {
 		return null;
 	}
 	
-	private ArrayList<String> selectTickets(int numRequested, inputValidation iv) {
+	public ArrayList<String> selectTickets(int numRequested, inputValidation iv, String option) {
 		// TODO Auto-generated method stub
 		System.out.println("Please type the ticket id now, type one id at a time, press enter when you finish typing one id");
 		Scanner sc = new Scanner(System.in);
-		//String seat = sc.nextLine();
 		ArrayList<String> res = new ArrayList<String>();
 		for(int i = 0; i < numRequested; i++){
-			String seat = sc.nextLine();
-			while(!iv.validateSeats(seat, tickets)){
-				System.err.println("ticket id is invalid");
+			String id = sc.nextLine();
+			while(!iv.validateSeats(id, this, option)){
+				System.err.println("please re-enter id");
+				id = sc.nextLine();
 			};
+			res.add(id);
 			//res[i] = seat;
 			
 		}
 		return res;
 	}
 	
-	private double checkOut(Cart cart) {
+	public double checkOut(Cart cart) {
 		// TODO Auto-generated method stub
 		double charge = 0.0;
 		for(Ticket t : cart.getTickets()){
@@ -121,6 +122,13 @@ public class E_TicketingController {
 		}
 		
 		return charge;
+	}
+	
+	public void displayCart(Cart cart) {
+		// TODO Auto-generated method stub
+		for(Ticket t : cart.getTickets()){
+			System.out.println("	" + t.toString());
+		}
 	}
 
 
@@ -156,7 +164,7 @@ public class E_TicketingController {
 			System.out.print("You have picked " + option);
 			
 			if(controller.findCategory(option).getNumInStock() == 0){
-				System.err.println(" " + option + " is out of stock, you can select a different event");
+				System.err.println(" " + option + " is out of stock, you can shop for a different event");
 				continue;
 			}
 			
@@ -174,53 +182,71 @@ public class E_TicketingController {
 			}
 			
 			if(Integer.parseInt(num) > controller.findCategory(option).getNumInStock()){
-				System.err.println("The number of tickets you are requiring exceeds the number in stock.");
+				System.err.println("The number of tickets you are requiring exceeds the number in stock. Application closed, Thanks for shopping with us");
+				System.out.println();
+				break;
 			}else{
 				//get number of ticket requested
 				int numRequested = Integer.parseInt(num);
 				//create an arrying that holds all the ticket ids
-				ArrayList<String> seats = controller.selectTickets(numRequested, iv);
+				ArrayList<String> seats = controller.selectTickets(numRequested, iv, option);
+				for(String seat : seats){
+					int id = Integer.parseInt(seat);
+					//add ticket to cart
+					cart.getTickets().add(controller.findTicket(id));
+					//set ticket to unavailable
+					controller.findTicket(id).setAvail(false);
+					//update the category stock
+					controller.findCategory(option).setNumInStock(controller.getTickets());
+				}
 				
-				//System.out.println("ticket ids are" + seats.toString());
-				//validate id array
-/*				if(iv.validateSeats(seats, controller, option)){
-					//create cart
-					
-					//add the tickets user just picked
-					for(String seat : seats){
-						int id = Integer.parseInt(seat);
-						//add ticket to cart
-						cart.getTickets().add(controller.findTicket(id));
-						//set ticket to unavailable
-						controller.findTicket(id).setAvail(false);
-						//update the category stock
-						controller.findCategory(option).setNumInStock(controller.getTickets());
-					}
-					
-					System.out.println("Do you want to continue shopping(y/n)?");
-					String dc = reader.nextLine();
-					//if dc starts y or Y it will continue shopping, otherwise, it will jump out of the loop
-					if(dc.matches("^[y|Y].*")){
-						decision = "continue shopping";
-					}else{
-						break;
-					}
-					
+				System.out.println("Do you want to continue shopping(y/n)?");
+				String dc = reader.nextLine();
+				//if dc starts y or Y it will continue shopping, otherwise, it will jump out of the loop
+				if(dc.matches("^[y|Y].*")){
+					decision = "continue shopping";
 				}else{
-					//do nothing, display which ticket Id is wrong
-				}*/
-				
+					System.out.println("Your cart details: ");
+					controller.displayCart(cart);
+					
+					System.out.println("Do you want to modify your cart?(y/n)");
+					dc = reader.nextLine();
+					if(dc.matches("^[y|Y].*")){
+						decision = "modify cart";
+					}else{
+						decision = "Done Shopping";
+					}
+					while(decision.equalsIgnoreCase("modify cart")){
+						System.out.println("Type a ticket id to remove it from cart");
+						String id = reader.nextLine();
+						//validate ticket id 
+						while(!iv.validateSeatForCart(id, controller)){
+							System.err.println("please re-enter id");
+							id = reader.nextLine();
+						}
+						//remove ticket and set ticket to available again
+						cart.removeTicket(id, controller);
+						System.out.println("Finish modifying cart?(y/n)");
+						dc = reader.nextLine();
+						if(dc.matches("^[n|N].*")){
+							if(cart.getTickets().size() == 0){
+								System.out.println("Your cart is empty now!!, going back to view events stage");
+								decision = "continue shopping";
+								break;
+							}
+							System.out.println("Your cart details: ");
+							controller.displayCart(cart);
+							decision = "modify cart";
+						}else{
+							decision = "Done Shopping";
+							break;
+						}
+					}
+					//break;
+				}
 			}
 		}
 		
-		controller.checkOut(cart);
-		
-		
-		
-		
+		System.out.println("Your total amount is " + controller.checkOut(cart));	
 	}
-
-
-
-
 }

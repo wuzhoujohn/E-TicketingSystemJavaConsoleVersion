@@ -2,6 +2,8 @@ package com.fdmgroup.models;
 
 import java.util.*;
 
+import com.fdmgroup.controller.E_TicketingController;
+
 public class Cart {
 	private int cartId;
 	
@@ -47,6 +49,13 @@ public class Cart {
 
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
+	}
+
+
+	public void removeTicket(String id, E_TicketingController c) {
+		// TODO Auto-generated method stub
+		this.tickets.remove(c.findTicket(Integer.parseInt(id)));
+		c.findTicket(Integer.parseInt(id)).setAvail(true);
 	}
 	
 	

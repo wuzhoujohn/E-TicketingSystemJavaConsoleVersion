@@ -53,14 +53,50 @@ public class inputValidation {
 			return false;
 		}
 	}*/
-	public boolean validateSeats(String seat, List<Ticket> tickets) {
+
+	public boolean validateSeats(String id, E_TicketingController c, String option) {
 		// TODO Auto-generated method stub
-		
-		return false;
-		
+		int i = 0;
+		try{
+			int res = Integer.parseInt(id);
+			//System.out.println("id is " + res);
+			//if no ticket with this id exist or the category of ticket with the id is not equal to option, throw invalidTicketIdException
+			if(c.findTicket(res) == null){
+				throw new InvalidTicketIdException("ticket with id " + res + " does not exist! ");
+			}else{
+				if(!c.findTicket(res).getEvent().equalsIgnoreCase(option)){
+					throw new InvalidTicketIdException("ticket with id " + res + " exists, but it belongs to a different category: " + c.findTicket(res).getEvent());
+				}
+			}		
+			return true;
+		}catch(NumberFormatException e){
+			System.err.println(id + " is not a valid Ticket Id");
+			return false;
+		}catch(InvalidTicketIdException ie){
+			System.err.println(ie.getMessage());
+			return false;
+		}
 	}
 
-		
+	public boolean validateSeatForCart(String id, E_TicketingController c) {
+		// TODO Auto-generated method stub
+		int i = 0;
+		try{
+			int res = Integer.parseInt(id);
+			//System.out.println("id is " + res);
+			//if no ticket with this id exist or the category of ticket with the id is not equal to option, throw invalidTicketIdException
+			if(c.findTicket(res) == null){
+				throw new InvalidTicketIdException("ticket with id " + res + " does not exist!!");
+				}	
+			return true;
+		}catch(NumberFormatException e){
+			System.err.println(id + " is not a valid Ticket Id");
+			return false;
+		}catch(InvalidTicketIdException ie){
+			System.err.println(ie.getMessage());
+			return false;
+		}
+	}
 }
 
 	
