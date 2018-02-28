@@ -183,6 +183,7 @@ public class E_TicketingController {
 			
 			if(Integer.parseInt(num) > controller.findCategory(option).getNumInStock()){
 				System.err.println("The number of tickets you are requiring exceeds the number in stock. Application closed, Thanks for shopping with us");
+				decision = "Exit Application";
 				System.out.println();
 				break;
 			}else{
@@ -246,7 +247,9 @@ public class E_TicketingController {
 				}
 			}
 		}
-		
-		System.out.println("Your total amount is " + controller.checkOut(cart));	
+		if(decision.equalsIgnoreCase("done shopping")){
+			System.out.println("Your total amount is " + controller.checkOut(cart));
+		}
+			
 	}
 }
