@@ -64,6 +64,10 @@ public class ticketTest {
 		assertTrue("ticket2 is availble", t2.isAvail());
 		assertTrue("ticket3 is availble", t3.isAvail());
 		assertTrue("ticket4 is availble", t4.isAvail());
+		
+		t1.setAvail(false);
+		
+		assertTrue("ticket1 is not availble anymore", !t1.isAvail());
 	}
 	
 	

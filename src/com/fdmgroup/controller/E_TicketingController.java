@@ -16,6 +16,17 @@ public class E_TicketingController {
 	
 	private List<Ticket> tickets;
 	
+	/**
+	 * @param cats
+	 * @param tickets
+	 */
+	public E_TicketingController() {
+		super();
+		this.cats = new ArrayList<Category>();
+		this.tickets = new ArrayList<Ticket>();
+	}
+
+
 	private Setup setup = new Setup();
 	
 	public Setup getSetup() {
